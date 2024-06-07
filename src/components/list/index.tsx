@@ -1,15 +1,11 @@
 'use client'
 
-import { getProducts } from '@/services/products'
-import { useQuery } from '@tanstack/react-query'
+import { useProducts } from '@/hooks/use-products'
 import Card from './card'
 import { Container, Content } from './styles'
 
 export default function List() {
-  const { data: products } = useQuery({
-    queryKey: ['get-products'],
-    queryFn: getProducts,
-  })
+  const { data: products } = useProducts()
 
   return (
     <Container>
