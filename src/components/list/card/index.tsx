@@ -7,22 +7,33 @@ import {
   CardImage,
 } from './styles'
 
+import { IProducts } from '@/services/products'
 import { ShoppingBag } from 'lucide-react'
+import { decreaseString, formatCurrency } from './helpers'
 
-export default function Card() {
+interface ICardProps {
+  product: IProducts
+}
+
+export default function Card({ product }: ICardProps) {
   return (
     <CardContainer>
       <CardImage>
-        <Image src={img} alt="Product image" width={150} height={150} />
+        <Image
+          src={product.photo}
+          alt="Product image"
+          width={150}
+          height={150}
+        />
       </CardImage>
       <CardContent>
         <div>
-          <h1>Apple Watch Series 4 GPS</h1>
-          <div>R$399</div>
+          <h1>
+            {product.brand} {product.name}
+          </h1>
+          <div>{formatCurrency(product.price)}</div>
         </div>
-        <CardDescription>
-          Redesigned from scratch and completely revised.
-        </CardDescription>
+        <CardDescription>{decreaseString(product.description)}</CardDescription>
       </CardContent>
       <button>
         <ShoppingBag /> COMPRAR
