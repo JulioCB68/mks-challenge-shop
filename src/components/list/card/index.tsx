@@ -7,15 +7,20 @@ import {
   CardImage,
 } from './styles'
 
+import { useCart } from '@/context/cart-context'
 import { IProducts } from '@/services/products'
-import { ShoppingBag } from 'lucide-react'
 import { decreaseString, formatCurrency } from './helpers'
 
+import { ShoppingBag } from 'lucide-react'
 interface ICardProps {
   product: IProducts
 }
 
 export default function Card({ product }: ICardProps) {
+  const { addProductToCart, cart } = useCart()
+
+  const existInCart = cart.find((id) => product.id === id)
+
   return (
     <CardContainer>
       <CardImage>
@@ -35,7 +40,7 @@ export default function Card({ product }: ICardProps) {
         </div>
         <CardDescription>{decreaseString(product.description)}</CardDescription>
       </CardContent>
-      <button>
+      <button onClick={() => addProductToCart(product)}>
         <ShoppingBag /> COMPRAR
       </button>
     </CardContainer>

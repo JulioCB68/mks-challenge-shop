@@ -9,6 +9,7 @@ export interface IProducts {
   price: number
   createdAt: string
   updatedAt: string
+  quantity: number
 }
 
 export async function getProducts(): Promise<IProducts[]> {

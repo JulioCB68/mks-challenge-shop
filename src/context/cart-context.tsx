@@ -1,7 +1,7 @@
 'use client'
 
 import { IProducts } from '@/services/products'
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useContext, useState } from 'react'
 
 interface CartContextProps {
   children: ReactNode
@@ -12,6 +12,8 @@ interface CartContextI {
   addProductToCart: (product: IProducts) => void
   removeProductToCart: (productId: number) => void
   clearCart: () => void
+  increaseQuantity: (productId: number) => void
+  decreaseQuantity: (productId: number) => void
 }
 
 const initialValue: CartContextI = {
@@ -19,24 +21,54 @@ const initialValue: CartContextI = {
   addProductToCart: () => {},
   removeProductToCart: () => {},
   clearCart: () => {},
+  increaseQuantity: () => {},
+  decreaseQuantity: () => {},
 }
 
-const CartContext = createContext<CartContextI>(initialValue)
+export const CartContext = createContext<CartContextI>(initialValue)
 
 export default function CartContextProvider({ children }: CartContextProps) {
   const [cart, setCart] = useState<IProducts[]>(initialValue.cart)
 
-  const addProductToCart = (product: IProducts) => {
-    setCart([...cart, product])
+  function addProductToCart(product: IProducts) {
+    setCart((prevCart) => {
+      const existingProduct = prevCart.find((p) => p.id === product.id)
+      if (existingProduct) {
+        return prevCart.map((p) =>
+          p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p,
+        )
+      }
+      return [...prevCart, { ...product, quantity: 1 }]
+    })
   }
 
-  const removeProductToCart = (productId: number) => {
+  function removeProductToCart(productId: number) {
     const newCart = cart.filter((product) => product.id !== productId)
     setCart(newCart)
   }
 
-  const clearCart = () => {
+  function clearCart() {
     setCart([])
+  }
+
+  function increaseQuantity(productId: number) {
+    setCart((prevCart) =>
+      prevCart.map((p) =>
+        p.id === productId ? { ...p, quantity: p.quantity + 1 } : p,
+      ),
+    )
+  }
+
+  function decreaseQuantity(productId: number) {
+    setCart((prevCart) =>
+      prevCart
+        .map((p) =>
+          p.id === productId && p.quantity > 1
+            ? { ...p, quantity: p.quantity - 1 }
+            : p,
+        )
+        .filter((p) => p.quantity > 0),
+    )
   }
 
   return (
@@ -46,9 +78,15 @@ export default function CartContextProvider({ children }: CartContextProps) {
         addProductToCart,
         removeProductToCart,
         clearCart,
+        increaseQuantity,
+        decreaseQuantity,
       }}
     >
       {children}
     </CartContext.Provider>
   )
+}
+
+export function useCart() {
+  return useContext(CartContext)
 }

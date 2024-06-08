@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import { Cart, StyledHeader, Title } from './styles'
 
+import { useCart } from '@/context/cart-context'
 import { ShoppingCart } from 'lucide-react'
 import Sidebar from './sidebar'
 
 export default function Header() {
   const [isSidebarVisible, setSidebarVisible] = useState(false)
+  const { cart } = useCart()
 
   const toggleSidebar = () => {
     setSidebarVisible(!isSidebarVisible)
@@ -21,7 +23,7 @@ export default function Header() {
         </Title>
         <Cart onClick={toggleSidebar}>
           <ShoppingCart size={18} />
-          <p>0</p>
+          <p>{cart.length}</p>
         </Cart>
       </StyledHeader>
       <Sidebar isVisible={isSidebarVisible} onClose={toggleSidebar} />
