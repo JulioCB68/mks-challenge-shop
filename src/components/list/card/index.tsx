@@ -17,9 +17,7 @@ interface ICardProps {
 }
 
 export default function Card({ product }: ICardProps) {
-  const { addProductToCart, cart } = useCart()
-
-  const existInCart = cart.find((id) => product.id === id)
+  const { addProductToCart } = useCart()
 
   return (
     <CardContainer>

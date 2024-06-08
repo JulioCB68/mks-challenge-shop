@@ -5,6 +5,10 @@ export const CardContainer = styled.div`
   height: 100%;
   background-color: #fff;
   border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
   button {
     width: 100%;
@@ -25,6 +29,14 @@ export const CardContainer = styled.div`
       width: 1rem;
       margin: 0 0.5rem 0 0;
     }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    min-height: 21.25rem;
+  }
+
+  @media only screen and (min-width: 1400px) {
+    min-height: 20rem;
   }
 `
 

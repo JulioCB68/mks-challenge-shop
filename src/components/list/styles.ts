@@ -11,10 +11,6 @@ export const Container = styled.div`
   @media only screen and (min-width: 1024px) {
     margin: 7rem 0;
   }
-
-  @media only screen and (min-width: 1400px) {
-    /* max-width: 64rem; */
-  }
 `
 
 export const Content = styled.div`
