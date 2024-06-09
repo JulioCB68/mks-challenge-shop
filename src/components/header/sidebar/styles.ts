@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const SidebarContainer = styled.div<{ isVisible: boolean }>`
+interface SidebarContainerProps {
+  isVisible: boolean
+}
+
+export const SidebarContainer = styled.div<SidebarContainerProps>`
   position: fixed;
   top: 0;
   right: ${({ isVisible }) => (isVisible ? '0' : '-100%')};

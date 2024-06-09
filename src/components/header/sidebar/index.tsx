@@ -25,10 +25,10 @@ export default function Sidebar({ isVisible, onClose }: SidebarProps) {
     <SidebarContainer isVisible={isVisible}>
       <CartHeader>
         <p>
-          Cart <br />
-          Shopping
+          Carrinho <br />
+          de compras
         </p>
-        <button onClick={onClose}>
+        <button onClick={onClose} data-testid="closeModalButton">
           <X />
         </button>
       </CartHeader>
@@ -52,7 +52,10 @@ export default function Sidebar({ isVisible, onClose }: SidebarProps) {
               </div>
             </CartItemActions>
             <p>{item.price}</p>
-            <button onClick={() => removeProductToCart(item.id)}>
+            <button
+              onClick={() => removeProductToCart(item.id)}
+              data-testid="removeProductFromCartButton"
+            >
               <X />
             </button>
           </CartItem>

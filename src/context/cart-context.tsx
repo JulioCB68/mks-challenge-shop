@@ -7,7 +7,7 @@ interface CartContextProps {
   children: ReactNode
 }
 
-interface CartContextI {
+export interface CartContextI {
   cart: IProducts[]
   addProductToCart: (product: IProducts) => void
   removeProductToCart: (productId: number) => void
