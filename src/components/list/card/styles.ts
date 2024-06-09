@@ -79,7 +79,7 @@ export const CardContent = styled.div`
 `
 
 export const CardDescription = styled.p`
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   font-weight: 300;
   color: var(--text-dark-gray);
 `

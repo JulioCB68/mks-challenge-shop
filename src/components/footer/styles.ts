@@ -7,6 +7,8 @@ export const StyledFooter = styled.footer`
   justify-content: center;
   background-color: var(--footer);
   padding: 1rem 0;
+  position: fixed;
+  bottom: 0;
 
   p {
     font-size: 0.75rem;
