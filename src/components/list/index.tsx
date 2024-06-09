@@ -7,9 +7,8 @@ import Card from './card'
 import { Container, Content } from './styles'
 
 export default function List() {
-  const { data: products, isError, error } = useProducts()
+  const { data: products, isLoading, isError, error } = useProducts()
 
-  const isLoading = true
   return (
     <Container>
       <Content>
